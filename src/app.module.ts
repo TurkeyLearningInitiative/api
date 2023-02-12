@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FileModule } from './file/file.module';
+import { LectureNotesModule } from './lecture-notes/lecture-notes.module';
+import { UsersModule } from './users/users.module';
+import { MajorsModule } from './majors/majors.module';
+import { ClassesModule } from './classes/classes.module';
 
 @Module({
   imports: [
@@ -19,6 +23,10 @@ import { FileModule } from './file/file.module';
       inject: [ConfigService],
     }),
     FileModule,
+    LectureNotesModule,
+    MajorsModule,
+    ClassesModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

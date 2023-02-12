@@ -15,18 +15,23 @@ async function bootstrap() {
     .setTitle('Education API')
     .setDescription('Education API description')
     .setVersion('1.0')
-    .addTag('education')
     .build();
+
   const document = SwaggerModule.createDocument(app, configDocs);
   SwaggerModule.setup('docs', app, document);
 
   app.setGlobalPrefix('v1');
+
+  app.useGlobalPipes(
+      new ValidationPipe({}),
+  );
 
   config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
   });
+
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
