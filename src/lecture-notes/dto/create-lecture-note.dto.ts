@@ -1,11 +1,6 @@
 import { IsArray, IsString, IsUrl } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateLectureNoteDto {
-  @ApiProperty({
-    type: String,
-    description: 'This is a required property',
-  })
   @IsString()
   title: string;
 
