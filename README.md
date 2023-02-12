@@ -1,6 +1,6 @@
 # Turkey Learning Initiative API
 
 ## Tech Stack
-- Node.js & Express.js
+- Nest.js
 - Mongo DB
 - AWS S3
