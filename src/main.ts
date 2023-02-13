@@ -11,14 +11,18 @@ async function bootstrap() {
     origin: '*',
   });
 
-  app.setGlobalPrefix('v1');
-  app.useGlobalPipes(new ValidationPipe());
-
   config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
   });
+
+  app.setGlobalPrefix('v1');
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
 
   const configDocs = new DocumentBuilder()
     .setTitle('Education API')
@@ -27,20 +31,9 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, configDocs);
-
   SwaggerModule.setup('docs', app, document);
 
-  app.setGlobalPrefix('v1');
-
-  app.useGlobalPipes(new ValidationPipe({}));
-
-  config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION,
-  });
-
-  await app.listen(process.env.PORT || 3000);
+  await app.listen(process.env.PORT || 8080);
 }
 
 bootstrap();

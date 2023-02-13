@@ -14,7 +14,7 @@ export class LectureNote {
   @Prop({ default: 'Anonymous' })
   author: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, default: 'Anonymous' })
   uploader: string;
 
   @Prop({ required: true })
@@ -36,7 +36,10 @@ export class LectureNote {
   contentUrl: string;
 
   @Prop({ default: false })
-  isVerified: string;
+  isVerified: boolean;
 }
 
-export const LectureNoteSchema = SchemaFactory.createForClass(LectureNote);
+const LectureNoteSchema = SchemaFactory.createForClass(LectureNote);
+LectureNoteSchema.index({ searchText: 'text' });
+
+export { LectureNoteSchema };

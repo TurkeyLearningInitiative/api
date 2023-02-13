@@ -12,7 +12,7 @@ export class MajorsService {
   ) {}
 
   async create(createMajorDto: CreateMajorDto) {
-    let createdMajor = new this.majorModel(createMajorDto);
+    const createdMajor = new this.majorModel(createMajorDto);
 
     return await createdMajor.save();
   }

@@ -1,36 +1,63 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+  Query,
+  Put,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UserVerificationService } from './user-verification.service';
+import RoleGuard from '~/authentication/guards/role.guard';
+import { AccessTokenGuard } from '~/authentication';
+import { Roles } from '~/common/constants';
+import { PaginationParams } from './dto/pagination-params.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import {ApiTags} from "@nestjs/swagger";
 
-@ApiTags("Users")
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly userVerificationService: UserVerificationService,
+  ) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    await this.usersService.create(createUserDto);
+
+    await this.userVerificationService.sendEmailVerificatonNumber({
+      email: createUserDto.email,
+      name: createUserDto.name,
+    });
+
+    return { message: 'User created' };
   }
 
+  @UseGuards(RoleGuard(Roles.Admin))
+  @UseGuards(AccessTokenGuard)
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  findAll(@Query() { skip, limit }: PaginationParams) {
+    return this.usersService.findAll({ skip, limit });
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+    return this.usersService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  //TODO: Add hashing to password before brute save
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return await this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.usersService.remove(id);
+    return { message: 'User deleted successfully' };
   }
 }

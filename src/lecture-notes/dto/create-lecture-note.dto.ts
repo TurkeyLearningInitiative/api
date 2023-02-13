@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsString, IsUrl } from 'class-validator';
+import { IsArray, IsNotEmpty,IsOptional IsString, IsUrl } from 'class-validator';
 
 export class CreateLectureNoteDto {
   @IsString()
@@ -8,7 +8,12 @@ export class CreateLectureNoteDto {
   description: string;
 
   @IsString()
+  @IsOptional()
   author: string;
+
+  @IsString()
+  @IsOptional()
+  uploader: string;
 
   @IsUrl()
   heroImageUrl: string;
