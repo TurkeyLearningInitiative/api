@@ -6,11 +6,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { LectureNotesModule } from './lecture-notes/lecture-notes.module';
 import { MajorsModule } from './majors/majors.module';
 import { ClassesModule } from './classes/classes.module';
-import { S3ServiceService } from './s3-service/s3-service.service';
 import { FileUploadService } from './file-upload/file-upload.service';
 import { AuthenticationModule } from './authentication';
 import { MailModule } from './mail';
 import { JwtModule } from '@nestjs/jwt';
+import { S3Client } from '~/file-upload/s3-client/s3-client';
 
 @Module({
   imports: [
@@ -42,6 +42,6 @@ import { JwtModule } from '@nestjs/jwt';
     MailModule,
   ],
   controllers: [AppController],
-  providers: [AppService, S3ServiceService, FileUploadService],
+  providers: [AppService, FileUploadService, S3Client],
 })
 export class AppModule {}

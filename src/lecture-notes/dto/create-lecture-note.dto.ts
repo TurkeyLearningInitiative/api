@@ -1,4 +1,10 @@
-import { IsArray, IsNotEmpty,IsOptional IsString, IsUrl } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 
 export class CreateLectureNoteDto {
   @IsString()
@@ -28,5 +34,5 @@ export class CreateLectureNoteDto {
   majorId: string;
 
   @IsNotEmpty()
-  file: File;
+  file: File | Buffer;
 }
