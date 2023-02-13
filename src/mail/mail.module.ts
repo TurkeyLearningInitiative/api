@@ -15,7 +15,7 @@ import { MailController } from './mail.controller';
       useFactory: (configService: ConfigService) => {
         return {
           transport: {
-            service: 'gmail',
+            service: process.env.SMTP_SERVICE,
             host: process.env.SMTP_HOST,
             secure: process.env.SMTP_SECURE,
             auth: {
