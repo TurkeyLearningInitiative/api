@@ -1,7 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { LectureNotesService } from './lecture-notes.service';
 import { CreateLectureNoteDto } from './dto/create-lecture-note.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateLectureNoteDto } from './dto/update-lecture-note.dto';
+import { AccessTokenGuard } from '~/authentication';
+import RoleGuard from '~/authentication/guards/role.guard';
+import { Roles } from '~/common/constants';
 
 @ApiTags('Lecture Notes')
 @Controller('lecture-notes')
@@ -21,6 +34,16 @@ export class LectureNotesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.lectureNotesService.findOne(id);
+  }
+
+  @UseGuards(RoleGuard(Roles.Admin))
+  @UseGuards(AccessTokenGuard)
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateLectureNoteDto: UpdateLectureNoteDto,
+  ) {
+    return this.lectureNotesService.update(id, updateLectureNoteDto);
   }
 
   @Delete(':id')

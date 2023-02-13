@@ -1,14 +1,12 @@
 import {
   IsEmail,
-  IsEnum,
   IsNotEmpty,
-  IsOptional,
+  IsObject,
   IsString,
   MinLength,
 } from 'class-validator';
-import { Roles } from '~/common/constants';
 
-export class CreateUserDto {
+export class updateMeStudentDto {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -27,7 +25,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   email: string;
 
-  @IsEnum(Roles)
-  @IsOptional()
-  role: Roles;
+  @IsObject()
+  educationInfo: string;
 }
