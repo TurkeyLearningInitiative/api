@@ -17,6 +17,13 @@ async function bootstrap() {
     region: process.env.AWS_REGION,
   });
 
+  app.setGlobalPrefix('v1');
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
+
   const configDocs = new DocumentBuilder()
     .setTitle('Education API')
     .setDescription('Education API description')
@@ -25,13 +32,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, configDocs);
   SwaggerModule.setup('docs', app, document);
-
-  app.setGlobalPrefix('v1');
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-    }),
-  );
 
   await app.listen(process.env.PORT || 8080);
 }
