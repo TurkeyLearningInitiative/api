@@ -7,6 +7,8 @@ import { LectureNotesModule } from './lecture-notes/lecture-notes.module';
 import { UsersModule } from './users/users.module';
 import { MajorsModule } from './majors/majors.module';
 import { ClassesModule } from './classes/classes.module';
+import { S3ServiceService } from './s3-service/s3-service.service';
+import { FileUploadService } from './file-upload/file-upload.service';
 
 @Module({
   imports: [
@@ -27,6 +29,6 @@ import { ClassesModule } from './classes/classes.module';
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, S3ServiceService, FileUploadService],
 })
 export class AppModule {}

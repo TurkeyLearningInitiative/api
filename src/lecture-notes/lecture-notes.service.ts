@@ -15,7 +15,9 @@ export class LectureNotesService {
   ) {}
 
   async create(createLectureNoteDto: CreateLectureNoteDto) {
-    let createdLectureNote = new this.lectureNoteModel(createLectureNoteDto);
+    const contentUrl = '';
+
+    const createdLectureNote = new this.lectureNoteModel(createLectureNoteDto);
 
     return await createdLectureNote.save();
   }
