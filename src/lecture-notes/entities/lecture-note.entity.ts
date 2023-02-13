@@ -40,4 +40,7 @@ export class LectureNote {
   isVerified: boolean;
 }
 
-export const LectureNoteSchema = SchemaFactory.createForClass(LectureNote);
+const LectureNoteSchema = SchemaFactory.createForClass(LectureNote);
+LectureNoteSchema.index({ searchText: 'text' });
+
+export { LectureNoteSchema };
