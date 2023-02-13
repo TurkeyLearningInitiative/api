@@ -45,7 +45,8 @@ export class LectureNotesController {
   ) {
     return this.lectureNotesService.update(id, updateLectureNoteDto);
   }
-
+  @UseGuards(RoleGuard(Roles.Admin))
+  @UseGuards(AccessTokenGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.lectureNotesService.remove(+id);
