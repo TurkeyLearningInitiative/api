@@ -20,4 +20,7 @@ export class ClassesService {
   async findAll() {
     return this.classModel.find();
   }
+  async remove(_id: number) {
+    return this.classModel.remove({_id});
+  }
 }
