@@ -25,6 +25,6 @@ export class ClassesController {
   @UseGuards(AccessTokenGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.classesService.remove(+id);
+    return this.classesService.remove(id);
   }
 }
