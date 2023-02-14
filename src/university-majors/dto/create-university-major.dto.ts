@@ -1,7 +1,7 @@
 import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateMajorDto {
+export class CreateUniversityMajorDto {
   @ApiProperty({
     type: String,
     description: 'The name of the Major',

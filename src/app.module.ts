@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LectureNotesModule } from './lecture-notes/lecture-notes.module';
-import { MajorsModule } from './majors/majors.module';
+import { UniversityMajorsModule } from './university-majors/university-majors.module';
 import { CoursesModule } from './courses/courses.module';
 import { FileUploadService } from './file-upload/file-upload.service';
 import { AuthenticationModule } from './authentication';
@@ -38,7 +38,7 @@ import { UniversitiesModule } from './universities/universities.module';
 
     AuthenticationModule,
     LectureNotesModule,
-    MajorsModule,
+    UniversityMajorsModule,
     CoursesModule,
     MailModule,
     UniversitiesModule,

@@ -16,5 +16,5 @@ export class CreateCourseDto {
     example: '63e8db500cf2728f997eaeb3',
   })
   @IsString()
-  majorId: string;
+  universityMajor: string;
 }

@@ -3,10 +3,10 @@ import mongoose, { Document } from 'mongoose';
 import { University } from '~/universities/entities/university.entity';
 import { Type } from 'class-transformer';
 
-export type MajorDocument = Major & Document;
+export type UniversityMajorDocument = UniversityMajor & Document;
 
 @Schema({ timestamps: true, versionKey: false })
-export class Major {
+export class UniversityMajor {
   @Prop({ required: true })
   name: string;
 
@@ -19,4 +19,4 @@ export class Major {
   university: University;
 }
 
-export const MajorSchema = SchemaFactory.createForClass(Major);
+export const MajorSchema = SchemaFactory.createForClass(UniversityMajor);
