@@ -16,9 +16,10 @@ import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { UpdateLectureNoteDto } from './dto/update-lecture-note.dto';
 import { AccessTokenGuard } from '~/authentication';
 import RoleGuard from '~/authentication/guards/role.guard';
-import { Roles } from '~/common/constants';
+import { MAXIMUM_FILE_SIZE, Roles } from '~/common/constants';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiImplicitFile } from '@nestjs/swagger/dist/decorators/api-implicit-file.decorator';
+import { SizeLimitInterceptor } from '~/lecture-notes/interceptors/file-size.interceptor';
 
 @ApiTags('Lecture Notes')
 @Controller('lecture-notes')
@@ -28,6 +29,7 @@ export class LectureNotesController {
   @Post()
   @ApiConsumes('multipart/form-data')
   @ApiImplicitFile({ name: 'file', required: true })
+  @UseInterceptors(new SizeLimitInterceptor(1024 * 1024 * MAXIMUM_FILE_SIZE)) // Bedirhan fixed
   @UseInterceptors(FileInterceptor('file'))
   create(
     @Body() createLectureNoteDto: CreateLectureNoteDto,
