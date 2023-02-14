@@ -12,7 +12,7 @@ export class ClassesService {
   ) {}
 
   async create(createClassDto: CreateClassDto) {
-    let createdClass = new this.classModel(createClassDto);
+    const createdClass = new this.classModel(createClassDto);
 
     return await createdClass.save();
   }
