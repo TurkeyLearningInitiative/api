@@ -5,7 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LectureNotesModule } from './lecture-notes/lecture-notes.module';
 import { MajorsModule } from './majors/majors.module';
-import { ClassesModule } from './classes/classes.module';
+import { CoursesModule } from './courses/coursesModule';
 import { FileUploadService } from './file-upload/file-upload.service';
 import { AuthenticationModule } from './authentication';
 import { MailModule } from './mail';
@@ -38,7 +38,7 @@ import { S3Client } from '~/file-upload/s3-client/s3-client';
     AuthenticationModule,
     LectureNotesModule,
     MajorsModule,
-    ClassesModule,
+    CoursesModule,
     MailModule,
   ],
   controllers: [AppController],
