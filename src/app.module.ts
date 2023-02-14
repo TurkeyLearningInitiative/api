@@ -5,7 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LectureNotesModule } from './lecture-notes/lecture-notes.module';
 import { MajorsModule } from './majors/majors.module';
-import { CoursesModule } from './courses/coursesModule';
+import { CoursesModule } from './courses/courses.module';
 import { FileUploadService } from './file-upload/file-upload.service';
 import { AuthenticationModule } from './authentication';
 import { MailModule } from './mail';

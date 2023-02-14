@@ -4,7 +4,7 @@ import { DEFAULT_HERO_IMAGES } from '~/common/constants';
 
 export type LectureNoteDocument = LectureNote & Document;
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, versionKey: false })
 export class LectureNote {
   @Prop({ required: true })
   title: string;

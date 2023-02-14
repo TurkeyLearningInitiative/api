@@ -22,7 +22,7 @@ export class CreateLectureNoteDto {
   tags: string[] = [];
 
   @IsString()
-  classId: string;
+  courseId: string;
 
   @IsString()
   majorId: string;
