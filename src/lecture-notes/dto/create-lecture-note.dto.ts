@@ -22,8 +22,8 @@ export class CreateLectureNoteDto {
   tags: string[] = [];
 
   @IsString()
-  courseId: string;
+  course: string;
 
   @IsString()
-  majorId: string;
+  major: string;
 }

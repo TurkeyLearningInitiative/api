@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
+import { University } from '~/universities/entities/university.entity';
+import { Type } from 'class-transformer';
 
 export type MajorDocument = Major & Document;
 
@@ -7,6 +9,14 @@ export type MajorDocument = Major & Document;
 export class Major {
   @Prop({ required: true })
   name: string;
+
+  @Prop({
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'University',
+  })
+  @Type(() => University)
+  university: University;
 }
 
 export const MajorSchema = SchemaFactory.createForClass(Major);

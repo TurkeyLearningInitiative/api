@@ -11,6 +11,7 @@ import { AuthenticationModule } from './authentication';
 import { MailModule } from './mail';
 import { JwtModule } from '@nestjs/jwt';
 import { S3Client } from '~/file-upload/s3-client/s3-client';
+import { UniversitiesModule } from './universities/universities.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { S3Client } from '~/file-upload/s3-client/s3-client';
     MajorsModule,
     CoursesModule,
     MailModule,
+    UniversitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService, FileUploadService, S3Client],

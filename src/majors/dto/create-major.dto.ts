@@ -9,4 +9,12 @@ export class CreateMajorDto {
   })
   @IsString()
   name: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'The ID of the University',
+    example: '63ebfb1cb02e694c1cf93466',
+  })
+  @IsString()
+  university: string;
 }

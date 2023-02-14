@@ -1,6 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { DEFAULT_HERO_IMAGES } from '~/common/constants';
+import { Course } from '~/courses/entities/courses.entity';
+import { Type } from 'class-transformer';
+import { University } from '~/universities/entities/university.entity';
 
 export type LectureNoteDocument = LectureNote & Document;
 
@@ -27,11 +30,21 @@ export class LectureNote {
   @Prop({ required: true })
   searchText: string;
 
-  @Prop({ required: true })
-  classId: string;
+  @Prop({
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Course',
+  })
+  @Type(() => Course)
+  course: Course;
 
-  @Prop({ required: true })
-  majorId: string;
+  @Prop({
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'University',
+  })
+  @Type(() => University)
+  university: University;
 
   @Prop({ required: true })
   contentUrl: string;
