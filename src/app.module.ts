@@ -11,6 +11,7 @@ import { AuthenticationModule } from './authentication';
 import { MailModule } from './mail';
 import { JwtModule } from '@nestjs/jwt';
 import { S3Client } from '~/file-upload/s3-client/s3-client';
+import { GoogleStrategy } from './authentication/strategies/google.strategy'
 
 @Module({
   imports: [
@@ -42,6 +43,6 @@ import { S3Client } from '~/file-upload/s3-client/s3-client';
     MailModule,
   ],
   controllers: [AppController],
-  providers: [AppService, FileUploadService, S3Client],
+  providers: [AppService, FileUploadService, S3Client, GoogleStrategy],
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Req } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
@@ -95,5 +95,10 @@ export class AuthenticationService {
     );
 
     return { accessToken };
+  }
+  public async googleLogin(@Req() req) {
+    
+    const user = await {email: req.user.email, name: req.user.firstName, surname: req.user.lastName, password: req.user.accessToken}
+    return user
   }
 }
