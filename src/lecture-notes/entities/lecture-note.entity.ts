@@ -20,7 +20,7 @@ export class LectureNote {
   @Prop({ required: true })
   heroImageUrl: string;
 
-  @Prop({ required: true })
+  @Prop()
   tags: string[];
 
   @Prop({ required: true })
