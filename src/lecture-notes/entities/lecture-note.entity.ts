@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { DEFAULT_HERO_IMAGES } from '~/common/constants';
 
 export type LectureNoteDocument = LectureNote & Document;
 
@@ -17,7 +18,7 @@ export class LectureNote {
   @Prop({ required: true, default: 'Anonymous' })
   uploader: string;
 
-  @Prop({ required: true })
+  @Prop({ default: DEFAULT_HERO_IMAGES.DEFAULT })
   heroImageUrl: string;
 
   @Prop()

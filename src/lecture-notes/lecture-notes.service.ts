@@ -9,6 +9,7 @@ import { Model } from 'mongoose';
 import { UpdateLectureNoteDto } from './dto/update-lecture-note.dto';
 import { FileUploadService } from '~/file-upload/file-upload.service';
 import { UploadFileDto } from '~/file-upload/dto/upload-file.dto';
+import { generateSearchText } from '~/common/utils';
 
 @Injectable()
 export class LectureNotesService {
@@ -29,9 +30,10 @@ export class LectureNotesService {
       contentType: fileMimeType,
       body: fileBuffer,
     };
-    const contentUrl = await this.fileUploader.upload(uploadFileDto);
 
-    const searchText = `${createLectureNoteDto.title} ${createLectureNoteDto.description} ${createLectureNoteDto.tags} ${createLectureNoteDto.author} `;
+    const searchText = generateSearchText(createLectureNoteDto);
+
+    const contentUrl = await this.fileUploader.upload(uploadFileDto);
 
     return await this.lectureNoteModel.create({
       ...createLectureNoteDto,
