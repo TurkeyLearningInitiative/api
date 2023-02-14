@@ -12,12 +12,15 @@ export class ClassesService {
   ) {}
 
   async create(createClassDto: CreateClassDto) {
-    let createdClass = new this.classModel(createClassDto);
+    const createdClass = new this.classModel(createClassDto);
 
     return await createdClass.save();
   }
 
   async findAll() {
     return this.classModel.find();
+  }
+  async remove(_id: string) {
+    return this.classModel.remove({_id});
   }
 }
