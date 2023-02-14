@@ -32,7 +32,4 @@ export class CreateLectureNoteDto {
 
   @IsString()
   majorId: string;
-
-  @IsNotEmpty()
-  file: File | Buffer;
 }
