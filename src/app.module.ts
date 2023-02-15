@@ -13,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { S3Client } from '~/file-upload/s3-client/s3-client';
 import { GoogleStrategy } from './authentication/strategies/google.strategy'
 import { UniversitiesModule } from './universities/universities.module';
+import { OnlineLessonsModule } from './online-lessons/online-lessons.module';
 
 
 @Module({
@@ -44,6 +45,7 @@ import { UniversitiesModule } from './universities/universities.module';
     CoursesModule,
     MailModule,
     UniversitiesModule,
+    OnlineLessonsModule,
   ],
   controllers: [AppController],
   providers: [AppService, FileUploadService, S3Client, GoogleStrategy],
