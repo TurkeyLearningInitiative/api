@@ -9,7 +9,7 @@
 
 Install the node dependencies with "yarn" or "npm" install
 ```console
-~ $ yarn install
+yarn install
 ```
 Create an environment variable called "DB_URI". If you're using Webstorm you can do it from "Configurations" on the top right corner, or you can create a .env file.
 
@@ -21,7 +21,7 @@ DB_URI=/contact bedirhan or furkan for the connection string/
 To start the application run:
 
 ```console
-~ $ yarn start:dev
+yarn start:dev
 ```
 
 # Swagger
