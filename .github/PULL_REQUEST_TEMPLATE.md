@@ -1,10 +1,12 @@
 # Description
 
-As a ..., I want to ..., so I can ...
+discord username: tli#0001
 
-# Checklist
+closes #issue
 
-- [ ] This is something that can be verified to show that this user story is satisfied.
+Please describe your changes. Also describe your aim and content. Do not forget to list the dependencies required caused by those changes.
 
 
-# Related Issue
+## Things to check before creating a PR
+- [ ] I have inspected my topic, checked.
+- [ ] If it is a core feature, executed detailed tests.
