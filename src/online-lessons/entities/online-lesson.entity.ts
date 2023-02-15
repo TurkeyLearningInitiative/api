@@ -21,6 +21,5 @@ export class OnlineLesson {
 }
 
 const OnlineLessonSchema = SchemaFactory.createForClass(OnlineLesson);
-OnlineLessonSchema.index({ searchText: 'text' });
 
 export { OnlineLessonSchema };
