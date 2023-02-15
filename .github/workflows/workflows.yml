@@ -6,8 +6,6 @@ on:
   pull_request:
     branches: [ "main","dev" ]
 
-  workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,8 +16,7 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Install
-        run: yarn install --frozen-lockfile
-        
-      - name: Build
-        run: yarn build
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
