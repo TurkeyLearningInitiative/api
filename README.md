@@ -1,5 +1,7 @@
 # Turkey Learning Initiative API
 
+[![CI](https://github.com/TurkeyLearningInitiative/api/actions/workflows/workflows.yml/badge.svg?branch=main)](https://github.com/TurkeyLearningInitiative/api/actions/workflows/workflows.yml)
+
 ## Tech Stack
 - Node.js & Nest.js (Express.js)
 - Mongo DB
