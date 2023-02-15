@@ -14,7 +14,9 @@ import { UserVerificationService } from '~/users/user-verification.service';
 import { AuthenticationService } from './authentication.service';
 import { RegisterDto, RequestWithUser } from './dto';
 import { AccessTokenGuard, LocalAuthenticationGuard } from './guards';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
+
 
 @Controller('auth')
 @ApiTags('Authentication')
@@ -73,5 +75,16 @@ export class AuthenticationController {
   @Get('private-hello')
   sayHello(@Req() request: RequestWithUser) {
     return 'Hey guest, you are authenticated! your email:' + request.user.email;
+  }
+  @Get('google-login')
+  @UseGuards(AuthGuard('google'))
+  async googleAuth(@Req() req) {}
+
+  @Get('/google/redirect')
+  @UseGuards(AuthGuard('google'))
+  async googleAuthRedirect(@Req() req) {
+    const user = await this.authenticationService.googleLogin(req)
+    return this.authenticationService.register(user);
+    
   }
 }
