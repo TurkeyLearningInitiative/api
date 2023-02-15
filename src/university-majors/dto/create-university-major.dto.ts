@@ -1,7 +1,7 @@
 import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateMajorDto {
+export class CreateUniversityMajorDto {
   @ApiProperty({
     type: String,
     description: 'The name of the Major',
@@ -9,4 +9,12 @@ export class CreateMajorDto {
   })
   @IsString()
   name: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'The ID of the University',
+    example: '63ebfb1cb02e694c1cf93466',
+  })
+  @IsString()
+  university: string;
 }

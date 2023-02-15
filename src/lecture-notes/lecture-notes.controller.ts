@@ -6,15 +6,20 @@ import {
   Param,
   Patch,
   Post,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { LectureNotesService } from './lecture-notes.service';
 import { CreateLectureNoteDto } from './dto/create-lecture-note.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { UpdateLectureNoteDto } from './dto/update-lecture-note.dto';
 import { AccessTokenGuard } from '~/authentication';
 import RoleGuard from '~/authentication/guards/role.guard';
-import { Roles } from '~/common/constants';
+import { MAXIMUM_FILE_SIZE, Roles } from '~/common/constants';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiImplicitFile } from '@nestjs/swagger/dist/decorators/api-implicit-file.decorator';
+import { SizeLimitInterceptor } from '~/lecture-notes/interceptors/file-size.interceptor';
 
 @ApiTags('Lecture Notes')
 @Controller('lecture-notes')
@@ -22,8 +27,19 @@ export class LectureNotesController {
   constructor(private readonly lectureNotesService: LectureNotesService) {}
 
   @Post()
-  create(@Body() createLectureNoteDto: CreateLectureNoteDto) {
-    return this.lectureNotesService.create(createLectureNoteDto);
+  @ApiConsumes('multipart/form-data')
+  @ApiImplicitFile({ name: 'file', required: true })
+  @UseInterceptors(new SizeLimitInterceptor(1024 * 1024 * MAXIMUM_FILE_SIZE)) // Bedirhan fixed
+  @UseInterceptors(FileInterceptor('file'))
+  create(
+    @Body() createLectureNoteDto: CreateLectureNoteDto,
+    @UploadedFile('file') file: Express.Multer.File,
+  ) {
+    return this.lectureNotesService.create(
+      createLectureNoteDto,
+      file.buffer,
+      file.mimetype,
+    );
   }
 
   @Get()
@@ -45,6 +61,7 @@ export class LectureNotesController {
   ) {
     return this.lectureNotesService.update(id, updateLectureNoteDto);
   }
+
   @UseGuards(RoleGuard(Roles.Admin))
   @UseGuards(AccessTokenGuard)
   @Delete(':id')

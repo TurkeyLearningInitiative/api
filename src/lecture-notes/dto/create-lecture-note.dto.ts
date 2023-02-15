@@ -1,10 +1,5 @@
-import {
-  IsArray,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  IsUrl,
-} from 'class-validator';
+import { IsArray, IsOptional, IsString } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateLectureNoteDto {
   @IsString()
@@ -21,15 +16,14 @@ export class CreateLectureNoteDto {
   @IsOptional()
   uploader: string;
 
-  @IsUrl()
-  heroImageUrl: string;
-
   @IsArray()
-  tags: string[];
+  @IsOptional()
+  @ApiPropertyOptional()
+  tags: string[] = [];
 
   @IsString()
-  classId: string;
+  course: string;
 
   @IsString()
-  majorId: string;
+  major: string;
 }

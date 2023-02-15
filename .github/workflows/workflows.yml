@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    branches: [ "main","dev" ]
+
+  pull_request:
+    branches: [ "main","dev" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build

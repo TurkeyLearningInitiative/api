@@ -4,14 +4,16 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LectureNotesModule } from './lecture-notes/lecture-notes.module';
-import { MajorsModule } from './majors/majors.module';
-import { ClassesModule } from './classes/classes.module';
+import { UniversityMajorsModule } from './university-majors/university-majors.module';
+import { CoursesModule } from './courses/courses.module';
 import { FileUploadService } from './file-upload/file-upload.service';
 import { AuthenticationModule } from './authentication';
 import { MailModule } from './mail';
 import { JwtModule } from '@nestjs/jwt';
 import { S3Client } from '~/file-upload/s3-client/s3-client';
 import { GoogleStrategy } from './authentication/strategies/google.strategy'
+import { UniversitiesModule } from './universities/universities.module';
+
 
 @Module({
   imports: [
@@ -38,9 +40,10 @@ import { GoogleStrategy } from './authentication/strategies/google.strategy'
 
     AuthenticationModule,
     LectureNotesModule,
-    MajorsModule,
-    ClassesModule,
+    UniversityMajorsModule,
+    CoursesModule,
     MailModule,
+    UniversitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService, FileUploadService, S3Client, GoogleStrategy],

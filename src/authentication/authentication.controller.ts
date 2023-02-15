@@ -1,22 +1,25 @@
 import {
   Body,
-  Req,
   Controller,
-  HttpCode,
-  Post,
-  UseGuards,
   Get,
-  Query,
+  HttpCode,
   HttpException,
   HttpStatus,
+  Post,
+  Query,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { UserVerificationService } from '~/users/user-verification.service';
 import { AuthenticationService } from './authentication.service';
 import { RegisterDto, RequestWithUser } from './dto';
 import { AccessTokenGuard, LocalAuthenticationGuard } from './guards';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
+
 
 @Controller('auth')
+@ApiTags('Authentication')
 export class AuthenticationController {
   constructor(
     private readonly authenticationService: AuthenticationService,

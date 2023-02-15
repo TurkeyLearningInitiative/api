@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateLectureNoteDto } from './dto/create-lecture-note.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import {
@@ -7,22 +7,39 @@ import {
 } from './entities/lecture-note.entity';
 import { Model } from 'mongoose';
 import { UpdateLectureNoteDto } from './dto/update-lecture-note.dto';
+import { FileUploadService } from '~/file-upload/file-upload.service';
+import { UploadFileDto } from '~/file-upload/dto/upload-file.dto';
+import { generateSearchText } from '~/common/utils';
 
 @Injectable()
 export class LectureNotesService {
   constructor(
     @InjectModel(LectureNote.name)
     private lectureNoteModel: Model<LectureNoteDocument>,
+    private fileUploader: FileUploadService,
   ) {}
 
-  async create(createLectureNoteDto: CreateLectureNoteDto) {
-    const searchText = `${createLectureNoteDto.title} ${createLectureNoteDto.description} ${createLectureNoteDto.tags} ${createLectureNoteDto.author} `;
-    const createdLectureNote = await this.lectureNoteModel.create({
+  async create(
+    createLectureNoteDto: CreateLectureNoteDto,
+    fileBuffer: Buffer | File,
+    fileMimeType: string,
+  ) {
+    const uploadFileDto: UploadFileDto = {
+      name: createLectureNoteDto.title,
+      key: createLectureNoteDto.title,
+      contentType: fileMimeType,
+      body: fileBuffer,
+    };
+
+    const searchText = generateSearchText(createLectureNoteDto);
+
+    const contentUrl = await this.fileUploader.upload(uploadFileDto);
+
+    return await this.lectureNoteModel.create({
       ...createLectureNoteDto,
       searchText,
+      contentUrl,
     });
-
-    return createdLectureNote;
   }
 
   async findAll() {
@@ -30,14 +47,10 @@ export class LectureNotesService {
   }
 
   async update(id: string, updateLectureNoteDto: UpdateLectureNoteDto) {
-    return await this.lectureNoteModel.findByIdAndUpdate(
-      id,
-      updateLectureNoteDto,
-      {
-        new: true,
-        returnDocument: 'after',
-      },
-    );
+    return this.lectureNoteModel.findByIdAndUpdate(id, updateLectureNoteDto, {
+      new: true,
+      returnDocument: 'after',
+    });
   }
 
   async findOne(_id: string) {

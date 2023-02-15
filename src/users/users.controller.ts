@@ -1,13 +1,13 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  UseGuards,
-  Query,
-  Put,
+  Controller,
   Delete,
+  Get,
   Param,
+  Post,
+  Put,
+  Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,8 +17,10 @@ import { AccessTokenGuard } from '~/authentication';
 import { Roles } from '~/common/constants';
 import { PaginationParams } from './dto/pagination-params.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('users')
+@ApiTags('Users')
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
