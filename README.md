@@ -1,31 +1,59 @@
+<img src="https://avatars.githubusercontent.com/u/125182884?s=400&u=58bf1fba4a7990a77717f299a675e30c394df7a3&v=4" width="256">
+
+
+![CI](https://github.com/TurkeyLearningInitiative/api/actions/workflows/workflows.yml/badge.svg?branch=main)![GitHub stars](https://img.shields.io/github/stars/TurkeyLearningInitiative/api?style=social) ![GitHub forks](https://img.shields.io/github/forks/TurkeyLearningInitiative/api?style=social) ![GitHub last commit](https://img.shields.io/github/last-commit/TurkeyLearningInitiative/api?color=red&style=plastic) ![GitHub issues](https://img.shields.io/github/issues/TurkeyLearningInitiative/api)
+
 # Turkey Learning Initiative API
 
-[![CI](https://github.com/TurkeyLearningInitiative/api/actions/workflows/workflows.yml/badge.svg?branch=main)](https://github.com/TurkeyLearningInitiative/api/actions/workflows/workflows.yml)
+
+This project aims to provide easy access to educational content for citizens in regions where education is expected to be disrupted after the recent disasters in our country.
 
 ## Tech Stack
-- Node.js & Nest.js (Express.js)
-- Mongo DB
-- AWS S3
 
-# Running the Project
+Typescript, Nest.js, MongoDB, AWS, Railway
 
-Install the node dependencies with "yarn" or "npm" install
-```console
-yarn install
-```
-Create an environment variable called "DB_URI". If you're using Webstorm you can do it from "Configurations" on the top right corner, or you can create a .env file.
+## Run Locally
 
-.env file:
-```
-DB_URI=/contact bedirhan or furkan for the connection string/
+Clone the project
+
+```bash
+  git clone https://github.com/TurkeyLearningInitiative/api.git
 ```
 
-To start the application run:
+Go to the project directory
 
-```console
-yarn start:dev
+```bash
+  cd api
 ```
 
-# Swagger
+Install dependencies
 
-The Swagger documentation is located at localhost:3000/docs
+```bash
+  yarn install
+```
+
+Start the server
+
+```bash
+  yarn start
+```
+
+
+## Contributing
+
+Contributions are always welcome!
+
+See `contributing.md` for ways to get started.
+
+Please adhere to this project's `code of conduct`.
+
+
+## Environment Variables
+
+To run this project, you will need to add environment variables listed in .env.example file.
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
