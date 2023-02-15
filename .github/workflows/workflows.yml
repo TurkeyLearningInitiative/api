@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print
+        run: |
+          pwd
+          ls
       - name: Set up node
         uses: actions/setup-node@v2
         with:
