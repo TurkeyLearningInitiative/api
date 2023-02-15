@@ -17,11 +17,9 @@ jobs:
           node-version: '16.x'
 
       - name: Install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
+        run: yarn install --frozen-lockfile
 
       - name: Build
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
+        run: |
+          cd api/api
+          yarn run build
