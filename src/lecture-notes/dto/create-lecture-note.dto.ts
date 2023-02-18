@@ -25,5 +25,6 @@ export class CreateLectureNoteDto {
   course: string;
 
   @IsString()
-  major: string;
+  @IsOptional()
+  university: string;
 }

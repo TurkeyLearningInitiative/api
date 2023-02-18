@@ -19,4 +19,5 @@ export class UniversityMajor {
   university: University;
 }
 
-export const MajorSchema = SchemaFactory.createForClass(UniversityMajor);
+export const UniversityMajorSchema =
+  SchemaFactory.createForClass(UniversityMajor);

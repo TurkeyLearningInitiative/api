@@ -39,7 +39,6 @@ export class LectureNote {
   course: Course;
 
   @Prop({
-    required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: 'University',
   })
