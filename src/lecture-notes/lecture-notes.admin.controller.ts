@@ -7,7 +7,7 @@ import { Roles } from '~/common/constants';
 import { AccessTokenGuard } from '~/authentication';
 
 @ApiTags('ADMIN Lecture Notes')
-@Controller('admin/lecture-notes')
+@Controller('admin/lecture-notes/verify')
 export class LectureNotesController {
   constructor(private readonly lectureNotesService: LectureNotesService) {}
 
