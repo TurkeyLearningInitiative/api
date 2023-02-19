@@ -1,5 +1,4 @@
 import { CACHE_KEYS } from './constants';
-import { CreateLectureNoteDto } from '~/lecture-notes/dto/create-lecture-note.dto';
 
 export const getUserVerifyKey = (email: string) =>
   `${CACHE_KEYS.USER_VERIFICATION_CODE}${email}`;
@@ -9,13 +8,37 @@ export const generate6DigitNumber = () => {
 };
 
 export const generateSearchText = (
-  createLectureNoteDto: CreateLectureNoteDto,
+  generateSearchTextDto: GenerateSearchTextDto,
 ) => {
-  let searchText = `${createLectureNoteDto.title}|${createLectureNoteDto.description}|${createLectureNoteDto.author}|`;
+  let searchText = `${generateSearchTextDto.title}|${generateSearchTextDto.description}|${generateSearchTextDto.author}|`;
 
-  createLectureNoteDto.tags.map((tag) => {
-    searchText = searchText + `${tag}|`;
-  });
+  if (generateSearchTextDto.university) {
+    searchText += `${generateSearchTextDto.university}|`;
+  }
+
+  if (generateSearchTextDto.universityMajor) {
+    searchText += `${generateSearchTextDto.universityMajor}|`;
+  }
+
+  if (generateSearchTextDto.course) {
+    searchText += `${generateSearchTextDto.course}|`;
+  }
+
+  if (generateSearchTextDto.tags) {
+    generateSearchTextDto.tags.map((tag) => {
+      searchText += `${tag}|`;
+    });
+  }
 
   return searchText;
 };
+
+export class GenerateSearchTextDto {
+  title: string;
+  description: string;
+  author?: string;
+  tags?: string[];
+  university?: string;
+  universityMajor?: string;
+  course?: string;
+}

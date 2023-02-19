@@ -15,5 +15,6 @@ import {
   ],
   controllers: [UniversityMajorsController],
   providers: [UniversityMajorsService],
+  exports: [UniversityMajorsService],
 })
 export class UniversityMajorsModule {}

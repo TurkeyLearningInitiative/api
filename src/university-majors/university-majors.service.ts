@@ -25,4 +25,8 @@ export class UniversityMajorsService {
   findAll() {
     return this.universityMajorModel.find().populate('university', 'name');
   }
+
+  findOne(_id: string) {
+    return this.universityMajorModel.findOne({ _id });
+  }
 }

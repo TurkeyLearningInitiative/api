@@ -9,8 +9,11 @@ import { Model } from 'mongoose';
 import { UpdateLectureNoteDto } from './dto/update-lecture-note.dto';
 import { FileUploadService } from '~/file-upload/file-upload.service';
 import { UploadFileDto } from '~/file-upload/dto/upload-file.dto';
-import { generateSearchText } from '~/common/utils';
+import { generateSearchText, GenerateSearchTextDto } from '~/common/utils';
 import { VerifyLectureNoteDto } from '~/lecture-notes/dto/verify-lecture-note.dto';
+import { UniversitiesService } from '~/universities/universities.service';
+import { UniversityMajorsService } from '~/university-majors/university-majors.service';
+import { CoursesService } from '~/courses/courses.service';
 
 @Injectable()
 export class LectureNotesService {
@@ -18,6 +21,9 @@ export class LectureNotesService {
     @InjectModel(LectureNote.name)
     private lectureNoteModel: Model<LectureNoteDocument>,
     private fileUploader: FileUploadService,
+    private universitiesService: UniversitiesService,
+    private universityMajorsService: UniversityMajorsService,
+    private coursesService: CoursesService,
   ) {}
 
   async create(
@@ -32,7 +38,39 @@ export class LectureNotesService {
       body: fileBuffer,
     };
 
-    const searchText = generateSearchText(createLectureNoteDto);
+    /* eslint-disable */
+    let generateTextDto: GenerateSearchTextDto = {
+      title: createLectureNoteDto.title,
+      description: createLectureNoteDto.description,
+      author: createLectureNoteDto.author,
+    };
+
+    if (createLectureNoteDto.university) {
+      const university = await this.universitiesService.findOne(
+        createLectureNoteDto.university,
+      );
+      generateTextDto.university = university.name;
+    }
+
+    if (createLectureNoteDto.universityMajor) {
+      const universityMajor = await this.universityMajorsService.findOne(
+        createLectureNoteDto.universityMajor,
+      );
+      generateTextDto.universityMajor = universityMajor.name;
+    }
+
+    if (createLectureNoteDto.course) {
+      const course = await this.coursesService.findOne(
+        createLectureNoteDto.course,
+      );
+      generateTextDto.course = course.name;
+    }
+
+    if (createLectureNoteDto.tags) {
+      generateTextDto.tags = createLectureNoteDto.tags;
+    }
+
+    const searchText = generateSearchText(generateTextDto);
 
     const contentUrl = await this.fileUploader.upload(uploadFileDto);
 

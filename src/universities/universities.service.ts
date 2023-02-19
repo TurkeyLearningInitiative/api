@@ -13,9 +13,11 @@ export class UniversitiesService {
     private universityModel: Model<UniversityDocument>,
   ) {}
 
-  async findAll() {
-    const universities = await this.universityModel.find();
+  findAll() {
+    return this.universityModel.find();
+  }
 
-    return universities;
+  findOne(_id: string) {
+    return this.universityModel.findOne({ _id });
   }
 }

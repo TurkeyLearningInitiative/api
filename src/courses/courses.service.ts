@@ -24,4 +24,8 @@ export class CoursesService {
   async remove(_id: string) {
     return this.courseModel.remove({ _id });
   }
+
+  findOne(_id: string) {
+    return this.courseModel.findOne({ _id });
+  }
 }

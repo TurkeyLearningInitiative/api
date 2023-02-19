@@ -15,5 +15,6 @@ import {
   ],
   controllers: [UniversitiesController],
   providers: [UniversitiesService],
+  exports: [UniversitiesService],
 })
 export class UniversitiesModule {}
