@@ -17,5 +17,5 @@ describe('LectureNotesController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-    const x =5
+  const x = 5;
 });

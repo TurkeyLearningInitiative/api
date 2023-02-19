@@ -97,8 +97,12 @@ export class AuthenticationService {
     return { accessToken };
   }
   public async googleLogin(@Req() req) {
-    
-    const user = await {email: req.user.email, name: req.user.firstName, surname: req.user.lastName, password: req.user.accessToken}
-    return user
+    const user = await {
+      email: req.user.email,
+      name: req.user.firstName,
+      surname: req.user.lastName,
+      password: req.user.accessToken,
+    };
+    return user;
   }
 }

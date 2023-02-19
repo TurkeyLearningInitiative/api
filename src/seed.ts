@@ -8,41 +8,23 @@ const seed = async () => {
 
   const majorModel = connection.model(
     'UniversityMajor',
-    new mongoose.Schema({ name: 'string', university: 'ObjectId' }),
+    new mongoose.Schema({ name: 'string' }),
   );
 
   const courseModel = connection.model(
     'Course',
-    new mongoose.Schema({ name: 'string', universityMajor: 'ObjectId' }),
+    new mongoose.Schema({ name: 'string' }),
   );
-
-  const universityModel = connection.model(
-    'University',
-    new mongoose.Schema({
-      name: 'string',
-      alphaTwoCode: 'string',
-      country: 'string',
-      domains: 'Array',
-      webPages: 'Array',
-    }),
-  );
-
-  const universities = await universityModel.find();
 
   for (let i = 0; i < 10; i++) {
     await majorModel.create({
       name: faker.random.word(),
-      university:
-        universities[Math.floor(Math.random() * universities.length)]._id,
     });
   }
-
-  const majors = await majorModel.find();
 
   for (let i = 0; i < 50; i++) {
     await courseModel.create({
       name: faker.random.word(),
-      universityMajor: majors[Math.floor(Math.random() * majors.length)]._id,
     });
   }
 

@@ -11,7 +11,6 @@ export class Course {
   name: string;
 
   @Prop({
-    required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Major',
   })

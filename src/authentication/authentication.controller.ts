@@ -17,7 +17,6 @@ import { AccessTokenGuard, LocalAuthenticationGuard } from './guards';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 
-
 @Controller('auth')
 @ApiTags('Authentication')
 export class AuthenticationController {
@@ -83,8 +82,7 @@ export class AuthenticationController {
   @Get('/google/redirect')
   @UseGuards(AuthGuard('google'))
   async googleAuthRedirect(@Req() req) {
-    const user = await this.authenticationService.googleLogin(req)
+    const user = await this.authenticationService.googleLogin(req);
     return this.authenticationService.register(user);
-    
   }
 }

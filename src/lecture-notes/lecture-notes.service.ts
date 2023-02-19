@@ -10,6 +10,7 @@ import { UpdateLectureNoteDto } from './dto/update-lecture-note.dto';
 import { FileUploadService } from '~/file-upload/file-upload.service';
 import { UploadFileDto } from '~/file-upload/dto/upload-file.dto';
 import { generateSearchText } from '~/common/utils';
+import { VerifyLectureNoteDto } from '~/lecture-notes/dto/verify-lecture-note.dto';
 
 @Injectable()
 export class LectureNotesService {
@@ -59,5 +60,16 @@ export class LectureNotesService {
 
   async remove(_id: number) {
     return this.lectureNoteModel.remove({ _id });
+  }
+
+  async verify(verifyLectureNoteDto: VerifyLectureNoteDto) {
+    return this.lectureNoteModel.findByIdAndUpdate(
+      verifyLectureNoteDto.lectureNoteId,
+      { isVerified: true },
+      {
+        new: true,
+        returnDocument: 'after',
+      },
+    );
   }
 }
