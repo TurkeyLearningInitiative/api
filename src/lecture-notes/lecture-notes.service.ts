@@ -89,9 +89,9 @@ export class LectureNotesService {
   async findAll(queryParams: LectureNotesQueryDto) {
     try {
       const query = generateSearchLectureNoteDto(queryParams);
-  
+
       const lectureNotes = await this.lectureNoteModel.find(query);
-  
+
       return lectureNotes || [];
     } catch (error) {
       return [];
