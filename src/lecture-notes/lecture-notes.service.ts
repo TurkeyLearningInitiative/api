@@ -9,16 +9,11 @@ import { Model } from 'mongoose';
 import { UpdateLectureNoteDto } from './dto/update-lecture-note.dto';
 import { FileUploadService } from '~/file-upload/file-upload.service';
 import { UploadFileDto } from '~/file-upload/dto/upload-file.dto';
-import {
-  generateSearchLectureNoteDto,
-  generateSearchText,
-  GenerateSearchTextDto,
-} from '~/common/utils';
+import { generateSearchText, GenerateSearchTextDto } from '~/common/utils';
 import { VerifyLectureNoteDto } from '~/lecture-notes/dto/verify-lecture-note.dto';
 import { UniversitiesService } from '~/universities/universities.service';
 import { UniversityMajorsService } from '~/university-majors/university-majors.service';
 import { CoursesService } from '~/courses/courses.service';
-import { LectureNotesQueryDto } from './dto/search-lecture-note.dto';
 
 @Injectable()
 export class LectureNotesService {
@@ -86,16 +81,8 @@ export class LectureNotesService {
     });
   }
 
-  async findAll(queryParams: LectureNotesQueryDto) {
-    try {
-      const query = generateSearchLectureNoteDto(queryParams);
-  
-      const lectureNotes = await this.lectureNoteModel.find(query);
-  
-      return lectureNotes || [];
-    } catch (error) {
-      return [];
-    }
+  async findAll() {
+    return this.lectureNoteModel.find();
   }
 
   async update(id: string, updateLectureNoteDto: UpdateLectureNoteDto) {

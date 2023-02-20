@@ -6,7 +6,6 @@ import {
   Param,
   Patch,
   Post,
-  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -21,7 +20,6 @@ import { MAXIMUM_FILE_SIZE, Roles } from '~/common/constants';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiImplicitFile } from '@nestjs/swagger/dist/decorators/api-implicit-file.decorator';
 import { SizeLimitInterceptor } from '~/lecture-notes/interceptors/file-size.interceptor';
-import { LectureNotesQueryDto } from './dto/search-lecture-note.dto';
 
 @ApiTags('Lecture Notes')
 @Controller('lecture-notes')
@@ -45,8 +43,8 @@ export class LectureNotesController {
   }
 
   @Get()
-  findAll(@Query() queryDto: LectureNotesQueryDto) {
-    return this.lectureNotesService.findAll(queryDto);
+  findAll() {
+    return this.lectureNotesService.findAll();
   }
 
   @Get(':id')
